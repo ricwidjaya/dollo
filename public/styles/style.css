@@ -9,6 +9,34 @@ a {
   color: inherit;
 }
 
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn:checked {
+  color: inherit;
+  background-color: inherit;
+  box-shadow: none;
+  outline: none;
+}
+
+i {
+  font-size: 24px;
+}
+
 .personal {
-  
+  align-items: center;
+}
+
+.personal-btn {
+  background-color: transparent;
+  color: #000;
+  border: none;
+}
+
+.personal-btn::after {
+  content: none;
+}
+
+i {
+  font-size: 24px;
 }
