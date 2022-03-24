@@ -1,8 +1,23 @@
+/* 
+Color Scheme
+Red: #FF6B6B
+Yellow: #FFD93D
+Green: #6BCB77
+Blue: #4D96FF
+*/
+
 html,
 body {
   overflow: hidden;
   margin: 0;
   padding: 0;
+
+  /* Background image */
+  background-image: url('https://images.unsplash.com/photo-1519526933243-dd9747bfaae5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2874&q=80');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 a {
@@ -37,6 +52,6 @@ i {
   content: none;
 }
 
-i {
-  font-size: 24px;
+.signout {
+  color: #ff6b6b;
 }
