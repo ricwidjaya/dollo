@@ -1,7 +1,102 @@
-<h1>Dollo App</h1>
-<h1>Dollo App</h1>
-<h1>Dollo App</h1>
-<h1>Dollo App</h1>
-<h1>Dollo App</h1>
-<h1>Dollo App</h1>
-<h1>Dollo App</h1>
+<div class='container-fluid main'>
+  <h1>Good Evening, <span id='name'>Richard</span>.</h1>
+  <div class='row justify-content-evenly mt-4 mb-4'>
+    <div class='col-6'>
+      {{!-- Announcement --}}
+      <div class='card'>
+        <div class='card-body'>
+          <p class='card-title'><i class="fa-solid fa-bullhorn card-icon"></i> Announcement<p>
+          <hr />
+          {{!-- Announce Content --}}
+          <div class="announcements">
+            <div class="announce-list">
+              <h6 class='card-subtitle text-muted'>Congrats!! 主管發的</h6>
+              <p class='card-text'>給誰？ALL或被慶祝的人？放頭貼在標題右邊 ...</p>
+              <hr/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-3'>
+      {{!-- To-do --}}
+      <div class='card'>
+        <div class='card-body'>
+          <p class='card-title'><i class="fa-brands fa-creative-commons-nd card-icon"></i> To-dos<p>
+          <hr />
+          <div class="announcements">
+            <div class="todo-list d-flex justify-content-between align-items-center">
+              <h6 class='card-subtitle'>終於把首頁做完啦！</h6>
+              <div class="todo-operation d-flex justify-content-end">
+                <a class="btn btn-op" href="#"><i class="fa-regular fa-circle-check"></i></a>
+                <a class="btn btn-op" href="#"><i class="fa-regular fa-circle-xmark"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-3'>
+      {{!-- To-do --}}
+      <div class='card'>
+        <div class='card-body'>
+          <p class='card-title'><i class="fa-solid fa-circle-check card-icon"></i> Meetings<p>
+          <hr />
+          <div class="announcements">
+            <div class="announce-list">
+              <h6 class='card-subtitle mb-2 text-muted'>Dodo as a service</h6>
+              <div class="d-flex justify-content-between">
+                <small>
+                  <span>RW</span>
+                </small>
+                <small class="datetime">2022/4/1 13:30</small>
+              </div>
+              <hr>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='row justify-content-evenly'>
+    <div class='col-6'>
+      {{!-- Event --}}
+      <div class='card'>
+        <div class='card-body'>
+          <p class='card-title'><i class="fa-solid fa-people-robbery card-icon"></i> Incoming Events<p>
+          <hr />
+          {{!-- Event Content --}}
+          <div class="announcements">
+            <div class="announce-list">
+              <h6 class='card-subtitle text-muted'>Team Hotpot Lunch!</h6>
+              <p class='card-text'>Join up on Friday 12pm</p>
+              <hr/>
+            </div>
+            <div class="announce-list">
+              <h6 class='card-subtitle text-muted'>DevOps Hackerthon!</h6>
+              <p class='card-text'>Hack the ass out!</p>
+              <hr/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-6'>
+      {{!-- Fire Camp --}}
+      <div class='card'>
+        <div class='card-body'>
+          <p class='card-title'><i class="fa-solid fa-fire card-icon"></i> Happening Fire Camp<p>
+          <hr />
+          <div class="announcements">
+            {{!-- Fire Camp Content--}}
+            <div class="firecamp-list mb-2">
+              <h6 class='card-subtitle'>Card subtitle</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

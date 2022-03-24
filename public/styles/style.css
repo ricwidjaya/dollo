@@ -11,9 +11,10 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
+  background-color: #ffd6a5;
 
   /* Background image */
-  background-image: url('https://images.unsplash.com/photo-1519526933243-dd9747bfaae5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2874&q=80');
+  background-image: url('https://images.unsplash.com/photo-1629184920985-3eb1d6f8dc40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
@@ -47,10 +48,19 @@ i {
   margin: 0;
   padding: 0;
   height: 100vh;
+  background-color: #3d5a80;
 }
 
 h6 {
   margin: 0;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+.side-section {
+  color: #000;
 }
 
 .active {
@@ -74,4 +84,56 @@ h6 {
 
 .signout {
   color: #ff6b6b;
+}
+
+/* Main page */
+.main {
+  text-align: center;
+  margin: 8vh 0;
+}
+
+h1 {
+  font-size: 60px;
+  color: #fff;
+}
+
+.card-body {
+  height: 30vh;
+}
+
+.card-title {
+  text-align: start;
+  font-weight: 500;
+}
+
+.card-subtitle {
+  margin: 0;
+}
+
+.announcements {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.announce-list {
+  text-align: start;
+}
+
+.card-icon {
+  font-size: 16px;
+}
+
+.todo-list {
+  text-align: start;
+}
+
+.btn-op {
+  padding: 0;
+}
+
+.firecamp-list {
+  padding: 5px 15px;
+  text-align: start;
+  background-color: #f9c74f;
+  border-radius: 25px;
 }

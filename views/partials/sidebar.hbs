@@ -1,113 +1,3 @@
-{{!-- <div class='col-auto col-1 px-sm-2 px-0 bg-light shadow-lg'>
-  <div
-    class='d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100'
-  >
-    <a
-      href='/'
-      class='d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none'
-    >
-      <div class='fs-5 d-none d-sm-inline'><img
-          class='img-fluid'
-          src='/images/dollo.png'
-        /></div>
-    </a>
-    <ul
-      class='nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start dropdown-menu'
-      id='menu'
-    >
-      <li class='nav-item dropdown-item'>
-        <a href='#' class='nav-link align-middle px-0'>
-          <i class='fs-4 bi-house'></i>
-          <span class='ms-1 d-none d-sm-inline'>Home</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href='#submenu1'
-          data-bs-toggle='collapse'
-          class='nav-link px-0 align-middle'
-        >
-          <i class='fs-4 bi-speedometer2'></i>
-          <span class='ms-1 d-none d-sm-inline'>Event</span>
-        </a>
-      </li>
-      <li>
-        <a href='#' class='nav-link px-0 align-middle'>
-          <i class='fs-4 bi-table'></i>
-          <span class='ms-1 d-none d-sm-inline'>People</span></a>
-      </li>
-      <li>
-        <a
-          href='#submenu2'
-          data-bs-toggle='collapse'
-          class='nav-link px-0 align-middle'
-        >
-          <i class='fs-4 bi-bootstrap'></i>
-          <span class='ms-1 d-none d-sm-inline'>Channel</span></a>
-        <ul
-          class='collapse nav flex-column ms-1'
-          id='submenu2'
-          data-bs-parent='#menu'
-        >
-          <li class='w-100'>
-            <a href='#' class='nav-link px-0'>
-              <span class='d-none d-sm-inline'>group #1</span>
-            </a>
-          </li>
-          <li>
-            <a href='#' class='nav-link px-0'>
-              <span class='d-none d-sm-inline'>group #2</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a
-          href='#submenu3'
-          data-bs-toggle='collapse'
-          class='nav-link px-0 align-middle'
-        >
-          <i class='fs-4 bi-grid'></i>
-          <span class='ms-1 d-none d-sm-inline'>Products</span>
-        </a>
-        <ul
-          class='collapse nav flex-column ms-1'
-          id='submenu3'
-          data-bs-parent='#menu'
-        >
-          <li class='w-100'>
-            <a href='#' class='nav-link px-0'>
-              <span class='d-none d-sm-inline'>Product</span>
-              1</a>
-          </li>
-          <li>
-            <a href='#' class='nav-link px-0'>
-              <span class='d-none d-sm-inline'>Product</span>
-              2</a>
-          </li>
-          <li>
-            <a href='#' class='nav-link px-0'>
-              <span class='d-none d-sm-inline'>Product</span>
-              3</a>
-          </li>
-          <li>
-            <a href='#' class='nav-link px-0'>
-              <span class='d-none d-sm-inline'>Product</span>
-              4</a>
-          </li>
-        </ul>
-      </li>
-
-      {{! Dashboard }}
-      <li>
-        <a href='#' class='nav-link px-0 align-middle'>
-          <i class='fs-4 bi-people'></i>
-          <span class='ms-1 d-none d-sm-inline'>Dashboard</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div> --}}
 <nav class='nav flex-column justify-content-center'>
   {{! Nav Brand }}
   <a class='navbar-brand' href='#'>
@@ -127,7 +17,7 @@
       <a class='nav-link' href='#'>Event</a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='#'>Dashboard</a>
+      <a class='nav-link' href='#'>Task</a>
     </li>
 
     {{! Fire Camp }}
@@ -135,9 +25,14 @@
       <a class='nav-link'>Fire Camp</a>
     </li>
 
+    {{! Google Map }}
+    <li class='nav-item'>
+      <a class='nav-link' href='#'>Team Map</a>
+    </li>
+
     {{! Direct Message }}
     <li class='nav-item'>
-      <h6 class='nav-link disabled'>Message</h6>
+      <h6 class='nav-link side-section'>Message</h6>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='#'>Richard</a>
