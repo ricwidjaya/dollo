@@ -25,8 +25,10 @@
     {{> personal}}
     <div class='container-fluid'>
       <div class='row flex-nowrap'>
-        {{> sidebar}}
-        <div class='col py-3'>
+        <div class='col-1 py-3 sidebar bg-light'>
+          {{> sidebar}}
+        </div>
+        <div class='col-auto py-3'>
           {{{body}}}
         </div>
       </div>
