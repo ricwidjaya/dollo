@@ -110,7 +110,7 @@ h1 {
   margin: 0;
 }
 
-.announcements {
+.card-list {
   height: 80%;
   overflow-y: scroll;
 }
