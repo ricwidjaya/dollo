@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const { ApolloServer } = require('apollo-server-express')
+const application = require('./GraphQL/application')
 const PORT = process.env.PORT
 const handlebars = require('express-handlebars')
 const { api, pages } = require('./routes')
@@ -19,9 +20,11 @@ app.use('/', pages)
 
 // GraphQL Apollo server
 let apolloServer
+// Load schema
+const schema = application.createSchemaForApollo()
 async function startServer() {
   apolloServer = new ApolloServer({
-    modules: [require('./GraphQL/users')]
+    schema
   })
   await apolloServer.start()
   apolloServer.applyMiddleware({ app })
@@ -30,5 +33,5 @@ startServer()
 
 app.listen(PORT, () => {
   console.log(`Dollo is running on port ${PORT} with love.`)
-  console.log(`GraphQL API is running at ${apolloServer.graphqlPath}`)
+  console.log(`GraphQL API is running at ${PORT}${apolloServer.graphqlPath}`)
 })
