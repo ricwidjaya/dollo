@@ -19,6 +19,13 @@
     />
     <link rel="stylesheet" href="/styles/style.css">
     <script src="https://kit.fontawesome.com/accdc8cd19.js" crossorigin="anonymous"></script>
+    {{!-- Custom style and script --}}
+    {{#if script}}
+    <script src="/scripts/{{script}}-bundle.js"></script>
+    {{/if}}
+    {{#if style}}
+    <link rel="stylesheet" href="/styles/{{style}}.css">
+    {{/if}}
   </head>
   <body>
 
