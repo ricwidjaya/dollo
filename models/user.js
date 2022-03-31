@@ -12,7 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Task, { foreignKey: 'userId' })
       User.hasMany(models.Permission, { foreignKey: 'userId' })
       User.hasMany(models.Event, { foreignKey: 'hostId' })
-      // User.belongsToMany(models.Event, )
+
+      // Join Tables
+      User.belongsToMany(models.Event, {
+        through: models.Participant,
+        foreignKey: 'userId',
+        as: 'AttendEvents'
+      })
     }
   }
   User.init(
