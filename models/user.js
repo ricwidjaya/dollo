@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Task, { foreignKey: 'userId' })
       User.hasMany(models.Permission, { foreignKey: 'userId' })
+      User.hasMany(models.Event, { foreignKey: 'hostId' })
+      // User.belongsToMany(models.Event, )
     }
   }
   User.init(
