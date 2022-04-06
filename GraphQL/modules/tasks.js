@@ -18,7 +18,7 @@ const taskModule = createModule({
       }
 
       type Mutation {
-        addTask(name: String): Task
+        addTask(name: String!): Task
         finishTask(id: ID!): Task
         deleteTask(id: ID!): Task
       }
@@ -47,6 +47,7 @@ const taskModule = createModule({
     Mutation: {
       addTask: async (root, args, context) => {
         const { name } = args
+        const userId = 1
         const task = await Task.create({
           userId,
           name

@@ -3,8 +3,43 @@ const { unpackFetchData, gqlConfig } = require('./client-helper')
 renderTodo()
 renderDoneList()
 
-// Functions
+// Add listener to todo modal
+const taskInput = document.querySelector('#task-name')
+const addBtn = document.querySelector('#addBtn')
 
+// Let user trigger click through "enter"
+taskInput.addEventListener('keyup', event => {
+  if (event.keyCode === 13) {
+    addBtn.click()
+  }
+})
+
+addBtn.addEventListener('click', async event => {
+  event.stopPropagation()
+  if (!taskInput.value.trim()) {
+    // Replace it with sweetAlert
+    window.alert('Please enter your task.')
+    return
+  }
+  await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        mutation {
+          addTask(name: "${taskInput.value}") {
+            id
+            name
+          }
+        }
+      `
+    })
+  })
+  renderTodo()
+  // reset modal input
+  taskInput.value = ''
+})
+
+// Functions
 // Render Todo List
 async function renderTodo() {
   const todoBox = document.querySelector('#todos')
@@ -22,6 +57,7 @@ async function renderTodo() {
     `
   })
   todoBox.innerHTML = tasksList
+  addTodoListener()
 }
 
 // Render done list
@@ -40,6 +76,8 @@ async function renderDoneList() {
     `
   })
   doneBox.innerHTML = taskList
+
+  // After all tasks are rendered, add event listeners to them for CRUD ops
   addTodoListener()
 }
 
@@ -76,7 +114,7 @@ function addTodoListener() {
       if (btn.dataset.op === 'check') {
         btn.parentElement.parentElement.remove()
 
-        const res = await fetch('/graphql', {
+        await fetch('/graphql', {
           ...gqlConfig,
           body: JSON.stringify({
             query: `
@@ -90,13 +128,12 @@ function addTodoListener() {
             `
           })
         })
-        const data = await unpackFetchData(res)
-        console.log(data.finishTask)
+        renderDoneList()
       }
 
       if (btn.dataset.op === 'delete') {
         btn.parentElement.parentElement.remove()
-        const res = await fetch('/graphql', {
+        await fetch('/graphql', {
           ...gqlConfig,
           body: JSON.stringify({
             query: `
