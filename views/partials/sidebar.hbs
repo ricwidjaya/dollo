@@ -11,23 +11,23 @@
   {{! Links }}
   <ul class='nav flex-column nav-list'>
     <li class='nav-item'>
-      <a class='nav-link active' aria-current='page' href='#'>Home</a>
+      <a class='nav-link {{#ifCon route 'index'}} active {{/ifCon}}' aria-current='page' href='/'>Home</a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='#'>Event</a>
+      <a class='nav-link {{#ifCon route 'event'}} active {{/ifCon}}' href='#'>Event</a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='#'>Task</a>
+      <a class='nav-link {{#ifCon route 'tasks'}} active {{/ifCon}}' href='/tasks'>Task</a>
     </li>
 
     {{! Fire Camp }}
     <li class='nav-item'>
-      <a class='nav-link'>Fire Camp</a>
+      <a class='nav-link {{#ifCon route 'fire'}} active {{/ifCon}}'>Fire Camp</a>
     </li>
 
     {{! Google Map }}
     <li class='nav-item'>
-      <a class='nav-link' href='#'>Team Map</a>
+      <a class='nav-link {{#ifCon route 'map'}} active {{/ifCon}}' href='#'>Team Map</a>
     </li>
 
     {{! Direct Message }}

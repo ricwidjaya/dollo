@@ -7,10 +7,14 @@ const { ApolloServer } = require('apollo-server-express')
 const application = require('./GraphQL/application')
 const PORT = process.env.PORT
 const handlebars = require('express-handlebars')
+const handlebarsHelper = require('./helpers/handlebar-helper')
 const { api, pages } = require('./routes')
 
 // Set view engine
-app.engine('hbs', handlebars.engine({ extname: '.hbs' }))
+app.engine(
+  'hbs',
+  handlebars.engine({ extname: '.hbs', helpers: handlebarsHelper })
+)
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
