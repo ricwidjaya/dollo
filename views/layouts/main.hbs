@@ -19,10 +19,7 @@
     />
     <link rel="stylesheet" href="/styles/style.css">
     <script src="https://kit.fontawesome.com/accdc8cd19.js" crossorigin="anonymous"></script>
-    {{!-- Custom style and script --}}
-    {{#if script}}
-    <script src="/scripts/{{script}}-bundle.js"></script>
-    {{/if}}
+    {{!-- Custom style --}}
     {{#if style}}
     <link rel="stylesheet" href="/styles/{{style}}.css">
     {{/if}}
@@ -47,5 +44,10 @@
       integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM'
       crossorigin='anonymous'
     ></script>
+
+    {{!-- Custom script --}}
+    {{#if script}}
+    <script src="/scripts/{{script}}-bundle.js"></script>
+    {{/if}}
   </body>
 </html>

@@ -18,24 +18,31 @@ const taskModule = createModule({
       }
 
       type Mutation {
-        addTask(userId: Int!, name: String): Task
-        finishTask(id: ID!, userId: Int!): Task
+        addTask(name: String): Task
+        finishTask(id: ID!): Task
+        deleteTask(id: ID!): Task
       }
     `
   ],
 
   resolvers: {
     Query: {
-      tasks: async () => await Task.findAll()
+      tasks: async (root, args, context) => await Task.findAll()
     },
 
     Mutation: {
       addTask: async (root, args, context) => {
-        const { userId, name } = args
+        const { name } = args
         const task = await Task.create({
           userId,
           name
         })
+        return task
+      },
+
+      finishTask: async (root, args, context) => {
+        const task = await Task.findByPk(args.id)
+        console.log(task)
         return task
       }
     }

@@ -24,7 +24,18 @@ let apolloServer
 const schema = application.createSchemaForApollo()
 async function startServer() {
   apolloServer = new ApolloServer({
-    schema
+    schema,
+    context: ({ req }) => {
+      const user = {
+        id: '1',
+        username: 'ricwid',
+        email: 'ricwid@gmail.com',
+        title: '火影'
+      }
+      // console.log(req)
+
+      return { user }
+    }
   })
   await apolloServer.start()
   apolloServer.applyMiddleware({ app })

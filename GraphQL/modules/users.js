@@ -27,7 +27,10 @@ const userModule = createModule({
 
   resolvers: {
     Query: {
-      users: async () => await User.findAll(),
+      users: async (root, args, context) => {
+        console.log(context.user)
+        return await User.findAll()
+      },
       user: async id => await User.findByPk(id)
     }
   }
