@@ -14,7 +14,7 @@ const taskModule = createModule({
       }
 
       type Query {
-        tasks: [Task]
+        tasks(done: Boolean): [Task]
       }
 
       type Mutation {
@@ -27,7 +27,21 @@ const taskModule = createModule({
 
   resolvers: {
     Query: {
-      tasks: async (root, args, context) => await Task.findAll()
+      tasks: async (root, args, context) => {
+        if (args.done) {
+          const tasks = await Task.findAll({
+            where: { done: true },
+            raw: true
+          })
+          return tasks
+        } else {
+          const tasks = await Task.findAll({
+            where: { done: false },
+            raw: true
+          })
+          return tasks
+        }
+      }
     },
 
     Mutation: {
@@ -41,8 +55,18 @@ const taskModule = createModule({
       },
 
       finishTask: async (root, args, context) => {
-        const task = await Task.findByPk(args.id)
-        console.log(task)
+        const { id } = args
+        const task = await Task.findByPk(id)
+        await task.update({
+          done: true
+        })
+        return task
+      },
+
+      deleteTask: async (root, args, context) => {
+        const { id } = args
+        const task = await Task.findByPk(id)
+        await task.destroy()
         return task
       }
     }

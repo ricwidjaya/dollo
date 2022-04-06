@@ -3,8 +3,9 @@ const gqlConfig = {
   headers: { 'Content-Type': 'application/json' }
 }
 
-async function unpackFetchData(result) {
-  const json = await result.json()
+async function unpackFetchData(res) {
+  const json = await res.json()
+  if (json.error) return json.error
   return json.data
 }
 

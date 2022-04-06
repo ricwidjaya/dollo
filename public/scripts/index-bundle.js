@@ -4,8 +4,9 @@ const gqlConfig = {
   headers: { 'Content-Type': 'application/json' }
 }
 
-async function unpackFetchData(result) {
-  const json = await result.json()
+async function unpackFetchData(res) {
+  const json = await res.json()
+  if (json.error) return json.error
   return json.data
 }
 
@@ -14,19 +15,56 @@ module.exports = { unpackFetchData, gqlConfig }
 },{}],2:[function(require,module,exports){
 const { unpackFetchData, gqlConfig } = require('./client-helper')
 
-
 renderTodo()
-
-
+renderDoneList()
 
 // Functions
-async function getTasks() {
-  const result = await fetch('/graphql', {
+
+// Render Todo List
+async function renderTodo() {
+  const todoBox = document.querySelector('#todos')
+  const tasks = await getTasks(false)
+  let tasksList = ''
+  tasks.forEach(task => {
+    tasksList += `
+    <div class="todo-list d-flex justify-content-between align-items-center">
+    <h6 class='card-subtitle'>${task.name}</h6>
+    <div class="todo-operation d-flex justify-content-end">
+    <a class="btn btn-op" data-op="check" data-task-id="${task.id}"><i class="fa-regular fa-circle-check"></i></a>
+    <a class="btn btn-op" data-op="delete" data-task-id="${task.id}"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    </div>
+    `
+  })
+  todoBox.innerHTML = tasksList
+}
+
+// Render done list
+async function renderDoneList() {
+  const doneBox = document.querySelector('#done-tasks')
+  const doneTasks = await getTasks(true)
+  let taskList = ''
+  doneTasks.forEach(task => {
+    taskList += `
+      <div class="todo-list d-flex justify-content-between align-items-center">
+        <h6 class='card-subtitle'>${task.name}</h6>
+        <div class="todo-operation d-flex justify-content-end">
+          <a class="btn btn-op" data-task-id="${task.id}" data-op="delete"><i class="fa-regular fa-circle-xmark"></i></a>
+        </div>
+      </div>
+    `
+  })
+  doneBox.innerHTML = taskList
+  addTodoListener()
+}
+
+async function getTasks(done) {
+  const res = await fetch('/graphql', {
     ...gqlConfig,
     body: JSON.stringify({
       query: `
       query getTasks {
-        tasks {
+        tasks(done: ${done}) {
           id
           userId
           name
@@ -36,26 +74,60 @@ async function getTasks() {
       `
     })
   })
-  const data = await unpackFetchData(result)
+  const data = await unpackFetchData(res)
   return data.tasks
 }
 
-// Render Todo List
-const renderTodo = async () => {
-  const todoBox = document.querySelector('#todos')
-  const tasks = await getTasks()
-  let tasksList = ''
-  tasks.forEach(task => {
-    tasksList += `
-      <div class="todo-list d-flex justify-content-between align-items-center">
-        <h6 class='card-subtitle'>${task.name}</h6>
-        <div class="todo-operation d-flex justify-content-end">
-          <a class="btn btn-op" href="#"><i class="fa-regular fa-circle-check"></i></a>
-          <a class="btn btn-op" href="#"><i class="fa-regular fa-circle-xmark"></i></a>
-        </div>
-      </div>
-    `
+function addTodoListener() {
+  const todoBtns = document.querySelectorAll('.btn-op')
+
+  todoBtns.forEach(btn => {
+    btn.addEventListener('click', async event => {
+      event.preventDefault()
+      event.stopPropagation()
+      const id = btn.dataset.taskId
+
+      // Check operation
+      if (btn.dataset.op === 'check') {
+        btn.parentElement.parentElement.remove()
+
+        const res = await fetch('/graphql', {
+          ...gqlConfig,
+          body: JSON.stringify({
+            query: `
+              mutation {
+                finishTask(id: ${id}) {
+                  id
+                  name
+                  done
+                }
+              }
+            `
+          })
+        })
+        const data = await unpackFetchData(res)
+        console.log(data.finishTask)
+      }
+
+      if (btn.dataset.op === 'delete') {
+        btn.parentElement.parentElement.remove()
+        const res = await fetch('/graphql', {
+          ...gqlConfig,
+          body: JSON.stringify({
+            query: `
+              mutation {
+                deleteTask(id: ${id}) {
+                  id
+                  name
+                  done
+                }
+              }
+            `
+          })
+        })
+      }
+    })
   })
-  todoBox.innerHTML = tasksList
 }
+
 },{"./client-helper":1}]},{},[2]);
