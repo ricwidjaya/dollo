@@ -8,6 +8,11 @@ router.get('/', (req, res, next) => {
   })
 })
 
-
+router.get('/login', (req, res, next) => {
+  return res.render('login', {
+    layout: 'user-auth',
+    style: 'sign'
+  })
+})
 
 module.exports = router

@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Announcement.init(
     {
-      title: DataTypes.STRING,
       content: DataTypes.TEXT,
       scale: DataTypes.STRING,
       exp_date: DataTypes.DATE,

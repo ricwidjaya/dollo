@@ -1,0 +1,9 @@
+.card {
+  max-width: 30rem;
+  height: auto;
+  margin-top: 6rem;
+}
+
+.card-body {
+  height: auto;
+}
