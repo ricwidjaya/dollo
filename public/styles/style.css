@@ -11,10 +11,10 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color: #ffd6a5;
+  background-color: #fff8f3;
 
   /* Background image */
-  background-image: url('https://images.unsplash.com/photo-1629184920985-3eb1d6f8dc40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');
+  /* background-image: url('https://images.unsplash.com/photo-1629184920985-3eb1d6f8dc40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -39,9 +39,6 @@ i {
   font-size: 24px;
 }
 
-hr {
-}
-
 .navbar-brand {
   padding-top: 0;
   margin: 0;
@@ -51,7 +48,7 @@ hr {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-color: #3d5a80;
+  background-color: #fff;
 }
 
 h6 {
@@ -59,11 +56,21 @@ h6 {
 }
 
 .nav-link {
+  color: #000;
+}
+
+.nav-link:hover {
   color: #fff;
+  background-color: #84b3f5;
 }
 
 .side-section {
   color: #000;
+}
+
+.side-section:hover {
+  color: inherit;
+  background-color: inherit;
 }
 
 .active {
@@ -97,7 +104,7 @@ h6 {
 
 h1 {
   font-size: 60px;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .card-body {
