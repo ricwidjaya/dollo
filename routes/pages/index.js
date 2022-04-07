@@ -8,10 +8,6 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.get('/tasks', (req, res, next) => {
-  return res.render('tasks', {
-    route: 'tasks'
-  })
-})
+
 
 module.exports = router
