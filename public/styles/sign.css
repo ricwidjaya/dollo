@@ -7,3 +7,12 @@
 .card-body {
   height: auto;
 }
+
+i {
+  font-size: medium;
+}
+
+.btn-outline-dark:hover {
+  color: #fff;
+  background-color: #000;
+}
