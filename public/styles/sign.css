@@ -12,6 +12,10 @@ i {
   font-size: medium;
 }
 
+small {
+  color: rgb(83, 82, 82);
+}
+
 .btn-outline-dark:hover {
   color: #fff;
   background-color: #000;
