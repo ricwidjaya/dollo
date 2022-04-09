@@ -8,10 +8,18 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.get('/login', (req, res, next) => {
-  return res.render('login', {
+router.get('/signin', (req, res, next) => {
+  return res.render('signin', {
     layout: 'user-auth',
     style: 'sign'
+  })
+})
+
+router.get('/signup', (req, res, next) => {
+  return res.render('signup', {
+    layout: 'user-auth',
+    style: 'sign',
+    script: 'signup'
   })
 })
 
