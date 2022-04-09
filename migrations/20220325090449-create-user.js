@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       first_name: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       last_name: {
@@ -29,11 +29,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       title: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       team_id: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       created_at: {

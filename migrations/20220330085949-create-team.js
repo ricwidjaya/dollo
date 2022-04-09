@@ -17,10 +17,6 @@ module.exports = {
         // The person who created it
         defaultValue: 1
       },
-      organization_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

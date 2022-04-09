@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Announcement.belongsTo(models.Organization, {
-        foreignKey: 'organizationId'
-      })
       Announcement.belongsTo(models.Team, { foreignKey: 'teamId' })
     }
   }
@@ -21,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       scale: DataTypes.STRING,
       exp_date: DataTypes.DATE,
       approved: DataTypes.BOOLEAN,
-      teamId: DataTypes.INTEGER,
-      organizationId: DataTypes.INTEGER
+      teamId: DataTypes.INTEGER
     },
     {
       sequelize,

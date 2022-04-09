@@ -11,17 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Permission.belongsTo(models.User, { foreignKey: 'userId' })
       Permission.belongsTo(models.Team, { foreignKey: 'teamId' })
-      Permission.belongsTo(models.Organization, {
-        foreignKey: 'organizationId'
+      Permission.belongsTo(models.Role, {
+        foreignKey: 'roleId'
       })
     }
   }
   Permission.init(
     {
       userId: DataTypes.INTEGER,
-      organizationId: DataTypes.INTEGER,
       teamId: DataTypes.INTEGER,
-      permission: DataTypes.STRING
+      roleId: DataTypes.INTEGER
     },
     {
       sequelize,

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Permissions', {
@@ -12,15 +12,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      organization_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       team_id: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      permission: {
+      role_id: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -37,6 +33,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Permissions');
+    await queryInterface.dropTable('Permissions')
   }
-};
+}
