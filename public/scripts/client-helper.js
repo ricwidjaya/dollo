@@ -1,6 +1,12 @@
+const token = '1234567'
+const bearer = `Bearer ${token}`
+
 const gqlConfig = {
   method: 'POST',
-  headers: { 'Content-Type': 'application/json' }
+  headers: {
+    Authorization: bearer,
+    'Content-Type': 'application/json'
+  }
 }
 
 async function unpackFetchData(res) {

@@ -36,7 +36,7 @@ async function startServer() {
         email: 'ricwid@gmail.com',
         title: '火影'
       }
-      // console.log(req)
+      console.log(req.headers)
 
       return { user }
     }
