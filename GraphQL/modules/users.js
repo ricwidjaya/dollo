@@ -1,5 +1,6 @@
 const { gql } = require('apollo-server-express')
 const { createModule } = require('graphql-modules')
+const jwt = require('jsonwebtoken')
 const { User } = require('../../models')
 
 const userModule = createModule({
@@ -18,9 +19,23 @@ const userModule = createModule({
         TeamId: Int
       }
 
+      type Token {
+        token: String
+      }
+
       type Query {
         users: [User]
         user(id: ID!): User
+        signIn(email: String!, password: String!): Token
+      }
+
+      type Mutation {
+        signUp(
+          username: String!
+          email: String!
+          password: String!
+          confirmPassword: String!
+        ): User
       }
     `
   ],
@@ -28,10 +43,21 @@ const userModule = createModule({
   resolvers: {
     Query: {
       users: async (root, args, context) => {
-        console.log(context.user)
         return await User.findAll()
       },
-      user: async id => await User.findByPk(id)
+      user: async id => await User.findByPk(id),
+      
+      signIn: async (root, args, context) => {
+        console.log('signIn')
+        console.log(args)
+      }
+    },
+
+    Mutation: {
+      signUp: async (root, args, context) => {
+        console.log('signUp')
+        console.log(args)
+      }
     }
   }
 })
