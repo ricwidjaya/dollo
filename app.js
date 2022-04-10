@@ -29,6 +29,10 @@ const schema = application.createSchemaForApollo()
 async function startServer() {
   apolloServer = new ApolloServer({
     schema,
+    formatError: error => {
+      console.log(error)
+      return error
+    },
     context: ({ req }) => {
       const user = {
         id: '1',
@@ -36,7 +40,7 @@ async function startServer() {
         email: 'ricwid@gmail.com',
         title: '火影'
       }
-      console.log(req.headers)
+      // console.log(req.header)
 
       return { user }
     }

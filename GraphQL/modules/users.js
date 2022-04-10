@@ -1,7 +1,8 @@
-const { gql } = require('apollo-server-express')
+const { gql, ApolloError, UserInputError } = require('apollo-server-express')
 const { createModule } = require('graphql-modules')
-const jwt = require('jsonwebtoken')
 const { User } = require('../../models')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 const userModule = createModule({
   id: 'user-module',
@@ -46,7 +47,7 @@ const userModule = createModule({
         return await User.findAll()
       },
       user: async id => await User.findByPk(id),
-      
+
       signIn: async (root, args, context) => {
         console.log('signIn')
         console.log(args)
@@ -55,8 +56,19 @@ const userModule = createModule({
 
     Mutation: {
       signUp: async (root, args, context) => {
-        console.log('signUp')
-        console.log(args)
+        const { username, email, password, confirmPassword } = args
+        const user = await User.findOne({ where: { email } })
+        if (user) throw new ApolloError('User already exist.')
+        if (password !== confirmPassword)
+          throw new UserInputError('Please check your password.')
+
+        const newUser = await User.create({
+          username,
+          email,
+          password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+        })
+
+        return newUser
       }
     }
   }
