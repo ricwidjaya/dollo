@@ -1,4 +1,9 @@
-const { gql, ApolloError, UserInputError } = require('apollo-server-express')
+const {
+  gql,
+  ApolloError,
+  UserInputError,
+  AuthenticationError
+} = require('apollo-server-express')
 const { createModule } = require('graphql-modules')
 const { User } = require('../../models')
 const jwt = require('jsonwebtoken')
@@ -49,8 +54,24 @@ const userModule = createModule({
       user: async id => await User.findByPk(id),
 
       signIn: async (root, args, context) => {
-        console.log('signIn')
-        console.log(args)
+        // Check user info
+        const { email, password } = args
+
+        if (!email || !password)
+          throw new AuthenticationError('Missing email or password.')
+
+        const user = await User.findOne({ where: { email } })
+
+        if (!user || !bcrypt.compareSync(password, user.password))
+          throw new AuthenticationError('Incorrect email or password.')
+
+        // Issue jwt token
+        const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+          expiresIn: '3d'
+        })
+        console.log(token)
+
+        return { token }
       }
     },
 

@@ -9,6 +9,7 @@ const PORT = process.env.PORT
 const handlebars = require('express-handlebars')
 const handlebarsHelper = require('./helpers/handlebar-helper')
 const { api, pages } = require('./routes')
+const passport = require('./config/passport')
 
 // Set view engine
 app.engine(
@@ -17,6 +18,8 @@ app.engine(
 )
 app.set('view engine', 'hbs')
 
+app.use(express.json())
+app.use(passport.initialize())
 app.use(express.static('public'))
 
 app.use('/api', api)

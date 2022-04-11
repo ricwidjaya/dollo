@@ -3,16 +3,29 @@
     <h2 class='text-center'>Sign in to Dollo</h2>
     <div class='col-12'>
       <label for='inputEmail' class='form-label'>Email</label>
-      <input type='email' class='form-control' id='inputEmail' autofocus />
+      <input
+        type='email'
+        class='form-control'
+        id='inputEmail'
+        name='email'
+        autofocus
+        required
+      />
     </div>
 
     <div class='col-12'>
       <label for='inputPassword' class='form-label'>Password</label>
-      <input type='text' class='form-control' id='inputPassword' />
+      <input
+        type='text'
+        class='form-control'
+        id='inputPassword'
+        name='password'
+        required
+      />
     </div>
 
     <div class='d-grid gap-2'>
-      <a class='btn btn-outline-dark' type='button'>Sign In</a>
+      <button class='btn btn-outline-dark' type='submit'>Sign In</button>
       <small class='text-center'>Or sign in with</small>
       <a class='btn btn-outline-dark' type='button'><i
           class='fa-brands fa-facebook-f'

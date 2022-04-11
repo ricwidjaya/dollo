@@ -11,7 +11,8 @@ router.get('/', (req, res, next) => {
 router.get('/signin', (req, res, next) => {
   return res.render('signin', {
     layout: 'user-auth',
-    style: 'sign'
+    style: 'sign',
+    script: 'signin'
   })
 })
 
