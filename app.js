@@ -10,6 +10,7 @@ const handlebars = require('express-handlebars')
 const handlebarsHelper = require('./helpers/handlebar-helper')
 const { api, pages } = require('./routes')
 const passport = require('./config/passport')
+const { authenticated } = require('./helpers/auth')
 
 // Set view engine
 app.engine(
@@ -37,15 +38,15 @@ async function startServer() {
       return error
     },
     context: ({ req }) => {
-      const user = {
-        id: '1',
-        username: 'ricwid',
-        email: 'ricwid@gmail.com',
-        title: '火影'
+      const query = req.body.query
+      if (query.includes('signIn') || query.includes('signUp')) {
+        return
       }
-      // console.log(req.header)
+      const auth = authenticated(req)
+      const token = req.headers.authorization
+      console.log(auth)
 
-      return { user }
+      return { token }
     }
   })
   await apolloServer.start()

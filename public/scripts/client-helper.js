@@ -1,4 +1,4 @@
-const token = '1234567'
+const token = localStorage.getItem('token') || ''
 const bearer = `Bearer ${token}`
 
 const gqlConfig = {

@@ -69,7 +69,6 @@ const userModule = createModule({
         const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
           expiresIn: '3d'
         })
-        console.log(token)
 
         return { token }
       }
