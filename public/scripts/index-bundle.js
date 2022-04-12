@@ -50,7 +50,28 @@ function checkUserInfo(account) {
   }
 }
 
+async function getMyInfo() {
+  const res = await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        query getMyInfo {
+          me {
+            id
+            username
+            email
+            avatar
+          }
+        }
+      `
+    })
+  })
+  const data = await unpackFetchData(res)
+  return data.me
+}
+
 module.exports = {
+  getMyInfo,
   checkUserInfo,
   extractFormValues,
   unpackFetchData,
@@ -58,9 +79,9 @@ module.exports = {
 }
 
 },{}],2:[function(require,module,exports){
-const { unpackFetchData, gqlConfig } = require('./client-helper')
+const { getMyInfo, unpackFetchData, gqlConfig } = require('./client-helper')
 
-getMyInfo()
+renderProfile()
 renderTodo()
 renderDoneList()
 
@@ -101,6 +122,15 @@ addBtn.addEventListener('click', async event => {
 })
 
 // Functions
+// Render personal info
+async function renderProfile() {
+  const avatar = document.querySelector('#avatar')
+  const name = document.querySelector('#name')
+  const user = await getMyInfo()
+  avatar.src = user.avatar
+  name.innerHTML = user.username
+}
+
 // Render Todo List
 async function renderTodo() {
   const todoBox = document.querySelector('#todos')
@@ -211,26 +241,6 @@ function addTodoListener() {
       }
     })
   })
-}
-
-async function getMyInfo() {
-  const res = await fetch('/graphql', {
-    ...gqlConfig,
-    body: JSON.stringify({
-      query: `
-        query getMyInfo {
-          me {
-            id
-            username
-            email
-            avatar
-          }
-        }
-      `
-    })
-  })
-  const data = await unpackFetchData(res)
-  console.log(data)
 }
 
 },{"./client-helper":1}]},{},[2]);

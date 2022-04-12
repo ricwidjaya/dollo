@@ -12,7 +12,7 @@ module.exports = {
         email: 'root@example.com',
         password: bcrypt.hashSync(defaultPassword, bcrypt.genSaltSync(10)),
         avatar:
-          'https://ui-avatars.com/api/?name=Root+Dollo&background=random&size=256&rounded=true&format=png',
+          'https://ui-avatars.com/api/?name=root&background=random&size=36&rounded=true&format=png&length=1',
         title: 'CEO',
         team_id: 1
       },
@@ -23,7 +23,7 @@ module.exports = {
         email: 'user1@example.com',
         password: bcrypt.hashSync(defaultPassword, bcrypt.genSaltSync(10)),
         avatar:
-          'https://ui-avatars.com/api/?name=User+One&background=random&size=256&rounded=true&format=png',
+          'https://ui-avatars.com/api/?name=user1&background=random&size=36&rounded=true&format=png&length=1',
         title: 'COO',
         team_id: 1
       },
@@ -34,7 +34,7 @@ module.exports = {
         email: 'ricwidjaya@gmail.com',
         password: bcrypt.hashSync(defaultPassword, bcrypt.genSaltSync(10)),
         avatar:
-          'https://ui-avatars.com/api/?name=Richard+Widjaya&background=random&size=256&rounded=true&format=png',
+          'https://ui-avatars.com/api/?name=ricwid&background=random&size=36&rounded=true&format=png&length=1',
         title: 'Software Engineer',
         team_id: 1
       }

@@ -101,7 +101,8 @@ const userModule = createModule({
         const newUser = await User.create({
           username,
           email,
-          password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+          password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
+          avatar: `https://ui-avatars.com/api/?name=${username}&background=random&size=36&rounded=true&format=png&length=1`
         })
 
         return newUser

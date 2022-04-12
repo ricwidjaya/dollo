@@ -49,7 +49,28 @@ function checkUserInfo(account) {
   }
 }
 
+async function getMyInfo() {
+  const res = await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        query getMyInfo {
+          me {
+            id
+            username
+            email
+            avatar
+          }
+        }
+      `
+    })
+  })
+  const data = await unpackFetchData(res)
+  return data.me
+}
+
 module.exports = {
+  getMyInfo,
   checkUserInfo,
   extractFormValues,
   unpackFetchData,
