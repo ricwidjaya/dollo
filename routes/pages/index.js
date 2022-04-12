@@ -18,6 +18,11 @@ router.get('/signup', isLoggedIn, (req, res, next) => {
   })
 })
 
+router.get('/logout', (req, res, next) => {
+  res.clearCookie('token')
+  return res.redirect('/signin')
+})
+
 router.get('/', pageAuth, (req, res, next) => {
   return res.render('index', {
     script: 'index',

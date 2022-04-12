@@ -23,15 +23,11 @@ const pageAuth = (req, res, next) => {
 }
 
 const isLoggedIn = (req, res, next) => {
-  const token = req.cookies.token
-  try {
+  const token = req.cookies.token || ''
+  if (token) {
     const auth = jwt.verify(token, process.env.JWT_SECRET)
     if (auth) {
       return res.redirect('/')
-    }
-  } catch (err) {
-    if (err) {
-      return res.redirect('/signin')
     }
   }
   next()

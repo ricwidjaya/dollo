@@ -23,4 +23,12 @@ form.addEventListener('submit', async event => {
       `
     })
   })
+  const data = await unpackFetchData(res)
+
+  if (data.errors) {
+    window.alert(data.errors[0].message)
+    return
+  }
+
+  window.location.reload()
 })

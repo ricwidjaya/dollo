@@ -1,10 +1,6 @@
-const token = localStorage.getItem('token') || ''
-const bearer = `Bearer ${token}`
-
 const gqlConfig = {
   method: 'POST',
   headers: {
-    Authorization: bearer,
     'Content-Type': 'application/json'
   }
 }
