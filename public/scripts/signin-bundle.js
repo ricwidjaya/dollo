@@ -87,9 +87,6 @@ form.addEventListener('submit', async event => {
       `
     })
   })
-  const data = await unpackFetchData(res)
-  const token = data.signIn.token
-  localStorage.setItem('token', token)
 })
 
 },{"./client-helper":1}]},{},[2]);

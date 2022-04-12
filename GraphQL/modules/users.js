@@ -70,6 +70,12 @@ const userModule = createModule({
           expiresIn: '3d'
         })
 
+        // Set HTTP-ONLY cookie to store jwt token
+        context.res.cookie('token', token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production'
+        })
+
         return { token }
       }
     },

@@ -98,6 +98,7 @@ async function getTasks(done) {
     })
   })
   const data = await unpackFetchData(res)
+  console.log(data)
   return data.tasks
 }
 
