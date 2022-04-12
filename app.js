@@ -11,6 +11,7 @@ const handlebarsHelper = require('./helpers/handlebar-helper')
 const { api, pages } = require('./routes')
 const cookieParser = require('cookie-parser')
 const passport = require('./config/passport')
+const jwt = require('jsonwebtoken')
 const { authenticated } = require('./helpers/auth')
 
 // Set view engine
@@ -40,11 +41,16 @@ async function startServer() {
       return error
     },
     context: ({ req, res }) => {
+      // Exclude pages don't need auth
       const query = req.body.query
       if (query.includes('signIn') || query.includes('signUp')) {
         return { req, res }
       }
+
+      // Authenticate user and put it in context
       authenticated(req, res)
+      const user = jwt.verify(req.cookies.token, process.env.JWT_SECRET)
+      return { user }
     }
   })
   await apolloServer.start()

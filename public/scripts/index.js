@@ -1,5 +1,6 @@
 const { unpackFetchData, gqlConfig } = require('./client-helper')
 
+getMyInfo()
 renderTodo()
 renderDoneList()
 
@@ -98,7 +99,6 @@ async function getTasks(done) {
     })
   })
   const data = await unpackFetchData(res)
-  console.log(data)
   return data.tasks
 }
 
@@ -151,4 +151,24 @@ function addTodoListener() {
       }
     })
   })
+}
+
+async function getMyInfo() {
+  const res = await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        query getMyInfo {
+          me {
+            id
+            username
+            email
+            avatar
+          }
+        }
+      `
+    })
+  })
+  const data = await unpackFetchData(res)
+  console.log(data)
 }

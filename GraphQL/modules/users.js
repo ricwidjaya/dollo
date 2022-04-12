@@ -30,6 +30,7 @@ const userModule = createModule({
       }
 
       type Query {
+        me: User
         users: [User]
         user(id: ID!): User
         signIn(email: String!, password: String!): Token
@@ -48,9 +49,15 @@ const userModule = createModule({
 
   resolvers: {
     Query: {
+      // Return current user
+      me: async (root, args, context) => {
+        return context.user
+      },
+
       users: async (root, args, context) => {
         return await User.findAll()
       },
+
       user: async id => await User.findByPk(id),
 
       signIn: async (root, args, context) => {
@@ -60,13 +67,16 @@ const userModule = createModule({
         if (!email || !password)
           throw new AuthenticationError('Missing email or password.')
 
-        const user = await User.findOne({ where: { email } })
+        const rawUser = await User.findOne({ where: { email } })
 
-        if (!user || !bcrypt.compareSync(password, user.password))
+        if (!rawUser || !bcrypt.compareSync(password, rawUser.password))
           throw new AuthenticationError('Incorrect email or password.')
 
+        const user = rawUser.toJSON()
+        delete user.password
+
         // Issue jwt token
-        const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+        const token = jwt.sign(user, process.env.JWT_SECRET, {
           expiresIn: '3d'
         })
 
