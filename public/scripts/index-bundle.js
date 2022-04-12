@@ -243,4 +243,6 @@ function addTodoListener() {
   })
 }
 
+module.exports = renderProfile
+
 },{"./client-helper":1}]},{},[2]);

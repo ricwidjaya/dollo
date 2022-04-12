@@ -28,15 +28,16 @@ const taskModule = createModule({
   resolvers: {
     Query: {
       tasks: async (root, args, context) => {
+        const userId = context.user.id
         if (args.done) {
           const tasks = await Task.findAll({
-            where: { done: true },
+            where: { userId, done: true },
             raw: true
           })
           return tasks
         } else {
           const tasks = await Task.findAll({
-            where: { done: false },
+            where: { userId, done: false },
             raw: true
           })
           return tasks
@@ -47,7 +48,7 @@ const taskModule = createModule({
     Mutation: {
       addTask: async (root, args, context) => {
         const { name } = args
-        const userId = 1
+        const userId = context.user.id
         const task = await Task.create({
           userId,
           name

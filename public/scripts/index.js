@@ -161,3 +161,5 @@ function addTodoListener() {
     })
   })
 }
+
+module.exports = renderProfile

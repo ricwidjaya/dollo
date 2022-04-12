@@ -2,10 +2,12 @@ const { AuthenticationError } = require('apollo-server-express')
 const passport = require('../config/passport')
 const jwt = require('jsonwebtoken')
 
-const authenticated = (req, res) => {
+const authenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err || !user) {
       throw new AuthenticationError('Jwt token not found.')
+      // Think about it...
+      next()
     }
   })(req, res)
 }
