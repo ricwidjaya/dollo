@@ -1,6 +1,7 @@
-const { gql } = require('apollo-server-express')
+const { gql, UserInputError } = require('apollo-server-express')
 const { createModule } = require('graphql-modules')
 const { Task } = require('../../models')
+const validator = require('validator')
 
 const taskModule = createModule({
   id: 'task-module',
@@ -49,6 +50,14 @@ const taskModule = createModule({
       addTask: async (root, args, context) => {
         const { name } = args
         const userId = context.user.id
+
+        // Check if length is over 20 words
+        if (!validator.isByteLength(name, { min: 1, max: 20 })) {
+          console.log('錯')
+          throw new UserInputError(
+            'To-do must be within at least 1 to 20 words.'
+          )
+        }
         const task = await Task.create({
           userId,
           name

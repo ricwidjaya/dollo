@@ -8,7 +8,9 @@ const gqlConfig = {
 // Clean response data from GraphQL API
 async function unpackFetchData(res) {
   const json = await res.json()
-  if (json.errors) return json
+  if (json.errors) {
+    return json
+  }
   return json.data
 }
 

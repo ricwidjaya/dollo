@@ -9,7 +9,9 @@ const gqlConfig = {
 // Clean response data from GraphQL API
 async function unpackFetchData(res) {
   const json = await res.json()
-  if (json.errors) return json
+  if (json.errors) {
+    return json
+  }
   return json.data
 }
 
@@ -103,7 +105,7 @@ addBtn.addEventListener('click', async event => {
     window.alert('Please enter your task.')
     return
   }
-  await fetch('/graphql', {
+  const res = await fetch('/graphql', {
     ...gqlConfig,
     body: JSON.stringify({
       query: `
@@ -116,6 +118,12 @@ addBtn.addEventListener('click', async event => {
       `
     })
   })
+  const data = await unpackFetchData(res)
+  if (data.errors) {
+    window.alert(data.errors[0].message)
+    taskInput.value = ''
+    return
+  }
   renderTodo()
   // reset modal input
   taskInput.value = ''

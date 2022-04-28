@@ -6,7 +6,7 @@ const authenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err || !user) {
       throw new AuthenticationError('Jwt token not found.')
-      // Think about it...
+      // Think about it...wah??
       next()
     }
   })(req, res)
