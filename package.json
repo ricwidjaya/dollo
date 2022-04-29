@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "^3.5.10",
+    "@faker-js/faker": "^6.2.0",
     "apollo-server-core": "^3.6.6",
     "apollo-server-express": "^3.6.6",
     "axios": "^0.26.1",
