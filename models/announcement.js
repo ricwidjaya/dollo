@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   Announcement.init(
     {
       content: DataTypes.TEXT,
-      scale: DataTypes.STRING,
       exp_date: DataTypes.DATE,
       approved: DataTypes.BOOLEAN,
-      teamId: DataTypes.INTEGER
+      teamId: DataTypes.INTEGER,
+      pin: DataTypes.BOOLEAN
     },
     {
       sequelize,
