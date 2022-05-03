@@ -13,6 +13,7 @@ module.exports = {
     )
     const team = [
       {
+        id: 1,
         name: 'Dollo',
         head_counts: headCounts[0]['count']
       }

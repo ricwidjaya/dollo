@@ -3,7 +3,7 @@ const { getMyInfo, unpackFetchData, gqlConfig } = require('./client-helper')
 renderProfile()
 renderTodo()
 renderDoneList()
-getAnnounces()
+renderAnnouncements()
 
 // Add listener to todo modal
 const taskInput = document.querySelector('#task-name')
@@ -169,9 +169,46 @@ function addTodoListener() {
   })
 }
 
-function getAnnounces() {
+async function getAnnounces() {
+  const res = await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        query getAnnounces {
+          announcements {
+            title
+            content
+            expDate
+            approved
+            teamId
+            pin
+          }
+        }
+      `
+    })
+  })
+  const data = await unpackFetchData(res)
+  return data.announcements
+}
+
+async function renderAnnouncements() {
   const announceBox = document.querySelector('#announces')
-  console.log(announceBox)
+  const announces = await getAnnounces()
+  let announceList = ''
+  announces.forEach(announce => {
+    announceList += `
+      <div class="announce-list mb-2">
+        <h6 class='card-subtitle text-muted'>
+        ${
+          announce.pin
+            ? `<i class="fa-solid fa-thumbtack card-icon me-2 pin"></i>`
+            : ''
+        }${announce.title}</h6>
+        <p class='card-text'>${announce.content}</p>
+      </div>
+    `
+  })
+  announceBox.innerHTML = announceList
 }
 
 module.exports = renderProfile

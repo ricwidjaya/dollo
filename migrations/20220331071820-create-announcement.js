@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      scale: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -27,6 +27,10 @@ module.exports = {
       team_id: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },
+      pin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       created_at: {
         allowNull: false,

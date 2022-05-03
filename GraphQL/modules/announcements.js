@@ -8,6 +8,8 @@ const announcementModule = createModule({
     gql`
       type Announcement {
         id: ID!
+        title: String
+        content: String
         expDate: String
         approved: Boolean
         teamId: Int
@@ -24,8 +26,15 @@ const announcementModule = createModule({
   resolvers: {
     Query: {
       announcements: async (root, args, context) => {
-        console.log('annouce valid')
-        return 'a'
+        const announces = await Announcement.findAll({
+          where: { teamId: context.user.teamId },
+          order: [
+            ['pin', 'DESC'],
+            ['id', 'DESC']
+          ],
+          raw: true
+        })
+        return announces
       },
 
       allAnnouncements: async (root, args, context) => {

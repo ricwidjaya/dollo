@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Announcement.init(
     {
+      title: DataTypes.STRING,
       content: DataTypes.TEXT,
       exp_date: DataTypes.DATE,
       approved: DataTypes.BOOLEAN,
