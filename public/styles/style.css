@@ -133,6 +133,10 @@ h1 {
   font-size: 16px;
 }
 
+.pin {
+  color: #4d96ff;
+}
+
 .add-task {
   padding: 0;
   position: absolute;

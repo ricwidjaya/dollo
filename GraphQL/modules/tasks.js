@@ -53,7 +53,6 @@ const taskModule = createModule({
 
         // Check if length is over 20 words
         if (!validator.isByteLength(name, { min: 1, max: 20 })) {
-          console.log('錯')
           throw new UserInputError(
             'To-do must be within at least 1 to 20 words.'
           )

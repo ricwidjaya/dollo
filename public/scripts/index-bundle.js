@@ -86,6 +86,7 @@ const { getMyInfo, unpackFetchData, gqlConfig } = require('./client-helper')
 renderProfile()
 renderTodo()
 renderDoneList()
+getAnnounces()
 
 // Add listener to todo modal
 const taskInput = document.querySelector('#task-name')
@@ -249,6 +250,11 @@ function addTodoListener() {
       }
     })
   })
+}
+
+function getAnnounces() {
+  const announceBox = document.querySelector('#announces')
+  console.log(announceBox)
 }
 
 module.exports = renderProfile
