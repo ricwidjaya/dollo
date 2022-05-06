@@ -6,6 +6,33 @@
       <div class='card'>
         <div class='card-body'>
           <p class='card-title'><i class="fa-solid fa-bullhorn card-icon"></i> Announcements<p>
+            <a class="btn add-task" data-bs-toggle="modal" data-bs-target="#announceModal">
+              <i class="fa-solid fa-plus card-icon"></i>
+            </a>
+
+            <!-- Announce Modal -->
+            <div class="modal fade" id="announceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">What's the News?</h5>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="announce-title" placeholder="Title">
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="announce-content" placeholder="Share it to the team.">
+                    </div>
+                    <div class="d-flex justify-content-md-end">
+                      <button id="announceBtn" data-bs-dismiss="modal" class="btn btn-danger align-self-end">Announce</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
           
           <div id="announces" class="card-list">
             {{!-- Announce Content --}}
@@ -22,7 +49,7 @@
               <i class="fa-solid fa-plus card-icon"></i>
             </a>
 
-            <!-- Modal -->
+            <!-- Todo Modal -->
             <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">

@@ -4,48 +4,8 @@ renderProfile()
 renderTodo()
 renderDoneList()
 renderAnnouncements()
-
-// Add listener to todo modal
-const taskInput = document.querySelector('#task-name')
-const addBtn = document.querySelector('#addBtn')
-
-// Let user trigger click through "enter"
-taskInput.addEventListener('keyup', event => {
-  if (event.keyCode === 13) {
-    addBtn.click()
-  }
-})
-
-addBtn.addEventListener('click', async event => {
-  event.stopPropagation()
-  if (!taskInput.value.trim()) {
-    // Replace it with sweetAlert
-    window.alert('Please enter your task.')
-    return
-  }
-  const res = await fetch('/graphql', {
-    ...gqlConfig,
-    body: JSON.stringify({
-      query: `
-        mutation {
-          addTask(name: "${taskInput.value}") {
-            id
-            name
-          }
-        }
-      `
-    })
-  })
-  const data = await unpackFetchData(res)
-  if (data.errors) {
-    window.alert(data.errors[0].message)
-    taskInput.value = ''
-    return
-  }
-  renderTodo()
-  // reset modal input
-  taskInput.value = ''
-})
+addTaskListener()
+addAnnounceListener()
 
 // Functions
 // Render personal info
@@ -55,6 +15,50 @@ async function renderProfile() {
   const user = await getMyInfo()
   avatar.src = user.avatar
   name.innerHTML = user.username
+}
+
+// Add listener to todo modal
+async function addTaskListener() {
+  const taskInput = document.querySelector('#task-name')
+  const addBtn = document.querySelector('#addBtn')
+
+  // Let user trigger click through "enter"
+  taskInput.addEventListener('keyup', event => {
+    if (event.keyCode === 13) {
+      addBtn.click()
+    }
+  })
+
+  addBtn.addEventListener('click', async event => {
+    event.stopPropagation()
+    if (!taskInput.value.trim()) {
+      // Replace it with sweetAlert
+      window.alert('Please enter your task.')
+      return
+    }
+    const res = await fetch('/graphql', {
+      ...gqlConfig,
+      body: JSON.stringify({
+        query: `
+        mutation {
+          addTask(name: "${taskInput.value}") {
+            id
+            name
+          }
+        }
+        `
+      })
+    })
+    const data = await unpackFetchData(res)
+    if (data.errors) {
+      window.alert(data.errors[0].message)
+      taskInput.value = ''
+      return
+    }
+    renderTodo()
+    // reset modal input
+    taskInput.value = ''
+  })
 }
 
 // Render Todo List
@@ -209,6 +213,63 @@ async function renderAnnouncements() {
     `
   })
   announceBox.innerHTML = announceList
+}
+
+async function addAnnounceListener() {
+  const titleInput = document.querySelector('#announce-title')
+  const contentInput = document.querySelector('#announce-content')
+  const announceBtn = document.querySelector('#announceBtn')
+
+  // Let user trigger click through "enter"
+  titleInput.addEventListener('keyup', event => {
+    if (event.keyCode === 13) {
+      announceBtn.click()
+    }
+  })
+
+  contentInput.addEventListener('keyup', event => {
+    if (event.keyCode === 13) {
+      announceBtn.click()
+    }
+  })
+
+  announceBtn.addEventListener('click', async event => {
+    event.stopPropagation()
+    if (!titleInput.value.trim() || !contentInput.value.trim()) {
+      window.alert('Please fill the form.')
+      return
+    }
+
+    const res = await fetch('/graphql', {
+      ...gqlConfig,
+      body: JSON.stringify({
+        query: `
+        mutation {
+          addAnnouncement(title: "${titleInput.value}", content: "${contentInput.value}") {
+            id
+            title
+            content
+            expDate
+            approved
+          }
+        }
+        `
+      })
+    })
+
+    const data = await unpackFetchData(res)
+
+    if (data.errors) {
+      window.alert(data.errors[0].message)
+      titleInput.value = ''
+      contentInput.value = ''
+      return
+    }
+    renderAnnouncements()
+    // reset modal input
+    titleInput.value = ''
+    contentInput.value = ''
+  })
 }
 
 module.exports = renderProfile

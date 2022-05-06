@@ -20,6 +20,10 @@ const announcementModule = createModule({
         announcements: [Announcement]
         allAnnouncements: [Announcement]
       }
+
+      type Mutation {
+        addAnnouncement(title: String!, content: String!): Announcement
+      }
     `
   ],
 
@@ -27,7 +31,7 @@ const announcementModule = createModule({
     Query: {
       announcements: async (root, args, context) => {
         const announces = await Announcement.findAll({
-          where: { teamId: context.user.teamId },
+          where: { teamId: context.user.teamId, approved: true },
           order: [
             ['pin', 'DESC'],
             ['id', 'DESC']
@@ -40,6 +44,27 @@ const announcementModule = createModule({
       allAnnouncements: async (root, args, context) => {
         console.log('all an')
         return 'b'
+      }
+    },
+
+    Mutation: {
+      addAnnouncement: async (root, args, context) => {
+        const { title, content } = args
+        if (!title || !content)
+          throw new UserInputError('Please fill out the form.')
+
+        // Set expired date as one day from now
+        const date = new Date()
+        const expDate = date.setDate(date.getDate() + 1)
+
+        const announce = await Announcement.create({
+          title,
+          content,
+          expDate,
+          teamId: context.user.teamId
+        })
+
+        return announce
       }
     }
   }

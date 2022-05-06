@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: DataTypes.STRING,
       content: DataTypes.TEXT,
-      exp_date: DataTypes.DATE,
+      expDate: DataTypes.DATE,
       approved: DataTypes.BOOLEAN,
       teamId: DataTypes.INTEGER,
       pin: DataTypes.BOOLEAN
