@@ -14,7 +14,8 @@ module.exports = {
         avatar:
           'https://ui-avatars.com/api/?name=root&background=random&size=36&rounded=true&format=png&length=1',
         title: 'CEO',
-        team_id: 1
+        team_id: 1,
+        role: 0
       },
       {
         username: 'user1',
@@ -25,7 +26,8 @@ module.exports = {
         avatar:
           'https://ui-avatars.com/api/?name=user1&background=random&size=36&rounded=true&format=png&length=1',
         title: 'COO',
-        team_id: 1
+        team_id: 1,
+        role: 1
       },
       {
         username: 'ricwid',
@@ -36,7 +38,8 @@ module.exports = {
         avatar:
           'https://ui-avatars.com/api/?name=ricwid&background=random&size=36&rounded=true&format=png&length=1',
         title: 'Software Engineer',
-        team_id: 1
+        team_id: 1,
+        role: 1
       }
     ]
     await queryInterface.bulkInsert('Users', seedUsers, {})

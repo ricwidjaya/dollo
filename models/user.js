@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Task, { foreignKey: 'userId' })
-      User.hasMany(models.Permission, { foreignKey: 'userId' })
       User.hasMany(models.Event, { foreignKey: 'hostId' })
 
       // Join Tables
@@ -30,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       avatar: DataTypes.STRING,
       title: DataTypes.STRING,
-      teamId: DataTypes.INTEGER
+      teamId: DataTypes.INTEGER,
+      role: DataTypes.INTEGER
     },
     {
       sequelize,

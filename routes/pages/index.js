@@ -24,6 +24,7 @@ router.get('/logout', (req, res, next) => {
 })
 
 router.get('/', pageAuth, (req, res, next) => {
+  console.log(req.cookies)
   return res.render('index', {
     script: 'index',
     route: 'index'

@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Team.hasMany(models.Announcement, { foreignKey: 'teamId' })
-      Team.hasMany(models.Permission, { foreignKey: 'teamId' })
     }
   }
   Team.init(

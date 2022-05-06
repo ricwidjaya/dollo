@@ -34,6 +34,11 @@ module.exports = {
       team_id: {
         type: Sequelize.INTEGER
       },
+      role: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
