@@ -22,4 +22,11 @@
       <a class='nav-link {{#ifCon route 'fire'}} active {{/ifCon}}'>Fire Camp</a>
     </li>
 
+    {{! Announce List }}
+    {{#ifCon role 'manager'}}
+      <li class='nav-item'>
+        <a href="#" class='nav-link {{#ifCon route 'announce-list'}} active {{/ifCon}}'>Announces</a>
+      </li>
+    {{/ifCon}}
+
 </nav>

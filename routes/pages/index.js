@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { pageAuth, isLoggedIn } = require('../../helpers/auth')
+const { pageAuth, isLoggedIn, checkRole } = require('../../helpers/auth')
 
 router.get('/signin', isLoggedIn, (req, res, next) => {
   return res.render('signin', {
@@ -24,10 +24,11 @@ router.get('/logout', (req, res, next) => {
 })
 
 router.get('/', pageAuth, (req, res, next) => {
-  console.log(req.cookies)
+  const role = checkRole(req)
   return res.render('index', {
     script: 'index',
-    route: 'index'
+    route: 'index',
+    role
   })
 })
 

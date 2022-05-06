@@ -35,4 +35,16 @@ const isLoggedIn = (req, res, next) => {
   next()
 }
 
-module.exports = { authenticated, pageAuth, isLoggedIn }
+const checkRole = req => {
+  const token = req.cookies.token || ''
+  if (token) {
+    const auth = jwt.verify(token, process.env.JWT_SECRET)
+
+    // If role equals 0, the user is manager
+    if (!auth.role) return 'manager'
+
+    return 'member'
+  }
+}
+
+module.exports = { authenticated, pageAuth, isLoggedIn, checkRole }
