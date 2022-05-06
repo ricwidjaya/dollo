@@ -22,6 +22,7 @@ const userModule = createModule({
         password: String
         avatar: String
         title: String
+        role: Int
         TeamId: Int
       }
 

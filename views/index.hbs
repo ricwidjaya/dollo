@@ -6,9 +6,21 @@
       <div class='card'>
         <div class='card-body'>
           <p class='card-title'><i class="fa-solid fa-bullhorn card-icon"></i> Announcements<p>
-            <a class="btn add-task" data-bs-toggle="modal" data-bs-target="#announceModal">
+            
+            {{#ifCon role 'manager'}}
+            <a 
+              class="btn add-task" 
+              href="/announce/new">
+                <i class="fa-solid fa-plus card-icon"></i>
+            </a>
+            {{else}}
+            <a 
+              class="btn add-task" 
+              data-bs-toggle="modal" 
+              data-bs-target="#announceModal">
               <i class="fa-solid fa-plus card-icon"></i>
             </a>
+            {{/ifCon}}
 
             <!-- Announce Modal -->
             <div class="modal fade" id="announceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

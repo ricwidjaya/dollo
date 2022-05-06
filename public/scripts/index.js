@@ -235,6 +235,7 @@ async function addAnnounceListener() {
 
   announceBtn.addEventListener('click', async event => {
     event.stopPropagation()
+
     if (!titleInput.value.trim() || !contentInput.value.trim()) {
       window.alert('Please fill the form.')
       return

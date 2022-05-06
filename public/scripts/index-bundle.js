@@ -63,6 +63,7 @@ async function getMyInfo() {
             username
             email
             avatar
+            role
           }
         }
       `
@@ -318,6 +319,7 @@ async function addAnnounceListener() {
 
   announceBtn.addEventListener('click', async event => {
     event.stopPropagation()
+
     if (!titleInput.value.trim() || !contentInput.value.trim()) {
       window.alert('Please fill the form.')
       return

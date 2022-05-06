@@ -62,6 +62,7 @@ async function getMyInfo() {
             username
             email
             avatar
+            role
           }
         }
       `

@@ -53,7 +53,7 @@ const announcementModule = createModule({
         if (!title || !content)
           throw new UserInputError('Please fill out the form.')
 
-        // Set expired date as one day from now
+        // Set default expired date as one day from now
         const date = new Date()
         const expDate = date.setDate(date.getDate() + 1)
 
