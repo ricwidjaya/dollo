@@ -1,4 +1,4 @@
-const { getMyInfo, unpackFetchData, gqlConfig } = require('./client-helper')
+const { renderProfile, unpackFetchData, gqlConfig } = require('./client-helper')
 
 renderProfile()
 renderTodo()
@@ -8,15 +8,6 @@ addTaskListener()
 addAnnounceListener()
 
 // Functions
-// Render personal info
-async function renderProfile() {
-  const avatar = document.querySelector('#avatar')
-  const name = document.querySelector('#name')
-  const user = await getMyInfo()
-  avatar.src = user.avatar
-  name.innerHTML = user.username
-}
-
 // Add listener to todo modal
 async function addTaskListener() {
   const taskInput = document.querySelector('#task-name')
@@ -273,4 +264,4 @@ async function addAnnounceListener() {
   })
 }
 
-module.exports = renderProfile
+module.exports = { renderProfile }

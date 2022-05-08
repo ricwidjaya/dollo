@@ -1,1 +1,48 @@
-<h1>form</h1>
+<div class='main'>
+  <h1>Make Announce to the Team</h1>
+</div>
+<form class='row g-3 mx-3 my-auto'>
+  <div class='col-md-6'>
+    <label for='title' class='form-label'>Title</label>
+    <input name='title' type='text' class='form-control' id='title' required />
+  </div>
+
+  <div class='col-12'>
+    <label for='content' class='form-label'>Content</label>
+    <input
+      name='content'
+      type='text'
+      class='form-control'
+      id='content'
+      required
+    />
+  </div>
+
+  <div class='col-md-4'>
+    <label for='expired-date' class='form-label'>Expired Date</label>
+    <input
+      name='expDate'
+      type='date'
+      id='expired-date'
+      class='form-control'
+      required
+    />
+  </div>
+
+  <div class='col-12'>
+    <div class='form-check'>
+      <input
+        name='pin'
+        class='form-check-input'
+        type='checkbox'
+        id='gridCheck'
+      />
+      <label class='form-check-label' for='gridCheck'>
+        Pin
+      </label>
+    </div>
+  </div>
+  <div class='col-12'>
+    <button id='button' class='btn btn-primary'>Announce</button>
+  </div>
+</form>

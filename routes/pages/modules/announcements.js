@@ -11,7 +11,11 @@ router.get('/', (req, res, next) => {
 
 router.get('/new', (req, res, next) => {
   const role = checkRole(req)
-  return res.render('announcements/form', { role })
+  return res.render('announcements/form', {
+    style: 'style',
+    script: 'announce-form',
+    role
+  })
 })
 
 router.get('/:id/edit', (req, res, next) => {

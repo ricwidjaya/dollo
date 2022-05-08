@@ -23,6 +23,12 @@ const announcementModule = createModule({
 
       type Mutation {
         addAnnouncement(title: String!, content: String!): Announcement
+        adminAnnounce(
+          title: String!
+          content: String!
+          expDate: String!
+          pin: Boolean!
+        ): Announcement
       }
     `
   ],
@@ -65,6 +71,20 @@ const announcementModule = createModule({
         })
 
         return announce
+      },
+
+      adminAnnounce: async (root, args, context) => {
+        const { title, content, expDate, pin } = args
+        const announcement = await Announcement.create({
+          title,
+          content,
+          expDate,
+          pin,
+          teamId: context.user.teamId,
+          approved: true
+        })
+
+        return announcement
       }
     }
   }

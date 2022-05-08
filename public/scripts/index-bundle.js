@@ -23,6 +23,11 @@ function extractFormValues(form) {
     if (element.tagName === 'INPUT') {
       inputValues[element.name] = element.value
     }
+
+    // Checkbox return boolean
+    if (element.type === 'checkbox') {
+      inputValues[element.name] = element.checked
+    }
   }
   return inputValues
 }
@@ -73,8 +78,19 @@ async function getMyInfo() {
   return data.me
 }
 
+// Render personal info
+async function renderProfile() {
+  const avatar = document.querySelector('#avatar')
+  const name = document.querySelector('#name')
+  const user = await getMyInfo()
+  avatar.src = user.avatar
+  if (name) {
+    name.innerHTML = user.username
+  }
+}
+
 module.exports = {
-  getMyInfo,
+  renderProfile,
   checkUserInfo,
   extractFormValues,
   unpackFetchData,
@@ -82,7 +98,7 @@ module.exports = {
 }
 
 },{}],2:[function(require,module,exports){
-const { getMyInfo, unpackFetchData, gqlConfig } = require('./client-helper')
+const { renderProfile, unpackFetchData, gqlConfig } = require('./client-helper')
 
 renderProfile()
 renderTodo()
@@ -92,15 +108,6 @@ addTaskListener()
 addAnnounceListener()
 
 // Functions
-// Render personal info
-async function renderProfile() {
-  const avatar = document.querySelector('#avatar')
-  const name = document.querySelector('#name')
-  const user = await getMyInfo()
-  avatar.src = user.avatar
-  name.innerHTML = user.username
-}
-
 // Add listener to todo modal
 async function addTaskListener() {
   const taskInput = document.querySelector('#task-name')
@@ -357,6 +364,6 @@ async function addAnnounceListener() {
   })
 }
 
-module.exports = renderProfile
+module.exports = { renderProfile }
 
 },{"./client-helper":1}]},{},[2]);
