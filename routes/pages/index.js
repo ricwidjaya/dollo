@@ -44,6 +44,7 @@ router.get('/', pageAuth, (req, res, next) => {
 router.get('*', (req, res, next) => {
   const role = checkRole(req)
   return res.status(404).render('404', {
+    script: '404',
     style: '404',
     role
   })

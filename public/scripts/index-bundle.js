@@ -89,8 +89,32 @@ async function renderProfile() {
   }
 }
 
+// Get announcements
+async function getAnnounces(role) {
+  const res = await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        query getAnnounces {
+          announcements(role: "${role}") {
+            title
+            content
+            expDate
+            approved
+            teamId
+            pin
+          }
+        }
+      `
+    })
+  })
+  const data = await unpackFetchData(res)
+  return data.announcements
+}
+
 module.exports = {
   renderProfile,
+  getAnnounces,
   checkUserInfo,
   extractFormValues,
   unpackFetchData,
@@ -98,7 +122,12 @@ module.exports = {
 }
 
 },{}],2:[function(require,module,exports){
-const { renderProfile, unpackFetchData, gqlConfig } = require('./client-helper')
+const {
+  renderProfile,
+  unpackFetchData,
+  gqlConfig,
+  getAnnounces
+} = require('./client-helper')
 
 renderProfile()
 renderTodo()
@@ -264,31 +293,9 @@ function addTodoListener() {
   })
 }
 
-async function getAnnounces() {
-  const res = await fetch('/graphql', {
-    ...gqlConfig,
-    body: JSON.stringify({
-      query: `
-        query getAnnounces {
-          announcements {
-            title
-            content
-            expDate
-            approved
-            teamId
-            pin
-          }
-        }
-      `
-    })
-  })
-  const data = await unpackFetchData(res)
-  return data.announcements
-}
-
 async function renderAnnouncements() {
   const announceBox = document.querySelector('#announces')
-  const announces = await getAnnounces()
+  const announces = await getAnnounces('member')
   let announceList = ''
   announces.forEach(announce => {
     announceList += `
@@ -363,7 +370,5 @@ async function addAnnounceListener() {
     contentInput.value = ''
   })
 }
-
-module.exports = { renderProfile }
 
 },{"./client-helper":1}]},{},[2]);

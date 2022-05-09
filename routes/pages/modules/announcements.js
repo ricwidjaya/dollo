@@ -5,14 +5,15 @@ const { checkRole } = require('../../../helpers/auth')
 router.get('/', (req, res, next) => {
   const role = checkRole(req)
   return res.render('announcements/show', {
+    style: 'announcements',
     script: 'announcements',
     role
   })
 })
 
-router.get('/archived', (req, res, next) => {
-  
-})
+// router.get('/archived', (req, res, next) => {
+
+// })
 
 router.get('/new', (req, res, next) => {
   const role = checkRole(req)

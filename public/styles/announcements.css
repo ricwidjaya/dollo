@@ -1,0 +1,11 @@
+.eraser:hover {
+  color: red;
+}
+
+.unapproved {
+  opacity: 0.6;
+}
+
+.card-body {
+  height: auto;
+}

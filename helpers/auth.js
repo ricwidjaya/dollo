@@ -52,7 +52,9 @@ const blockRole = role => {
     const currentUserRole = checkRole(req)
     if (role === currentUserRole) {
       return res.status(403).render('404', {
-        errorMessage: 'Access Denied'
+        errorMessage: 'Access Denied',
+        script: '404',
+        role: currentUserRole
       })
     }
     next()

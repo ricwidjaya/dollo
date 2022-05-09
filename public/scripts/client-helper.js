@@ -88,8 +88,32 @@ async function renderProfile() {
   }
 }
 
+// Get announcements
+async function getAnnounces(role) {
+  const res = await fetch('/graphql', {
+    ...gqlConfig,
+    body: JSON.stringify({
+      query: `
+        query getAnnounces {
+          announcements(role: "${role}") {
+            title
+            content
+            expDate
+            approved
+            teamId
+            pin
+          }
+        }
+      `
+    })
+  })
+  const data = await unpackFetchData(res)
+  return data.announcements
+}
+
 module.exports = {
   renderProfile,
+  getAnnounces,
   checkUserInfo,
   extractFormValues,
   unpackFetchData,

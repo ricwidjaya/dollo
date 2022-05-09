@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express')
 const { createModule } = require('graphql-modules')
 const { Announcement } = require('../../models')
+const { Op } = require('sequelize')
 
 const announcementModule = createModule({
   id: 'announcement-module',
@@ -17,7 +18,7 @@ const announcementModule = createModule({
       }
 
       type Query {
-        announcements: [Announcement]
+        announcements(role: String): [Announcement]
         allAnnouncements: [Announcement]
       }
 
@@ -36,15 +37,43 @@ const announcementModule = createModule({
   resolvers: {
     Query: {
       announcements: async (root, args, context) => {
-        const announces = await Announcement.findAll({
-          where: { teamId: context.user.teamId, approved: true },
-          order: [
-            ['pin', 'DESC'],
-            ['id', 'DESC']
-          ],
-          raw: true
-        })
-        return announces
+        const { role } = args
+
+        if (role === 'member') {
+          const announces = await Announcement.findAll({
+            where: {
+              teamId: context.user.teamId,
+              approved: true,
+              expDate: {
+                [Op.gt]: new Date()
+              }
+            },
+            order: [
+              ['pin', 'DESC'],
+              ['id', 'DESC']
+            ],
+            raw: true
+          })
+          return announces
+        }
+
+        if (role === 'manager') {
+          const announces = await Announcement.findAll({
+            where: {
+              teamId: context.user.teamId,
+              expDate: {
+                [Op.gte]: new Date()
+              }
+            },
+            order: [
+              ['approved', 'ASC'],
+              ['pin', 'DESC'],
+              ['id', 'DESC']
+            ],
+            raw: true
+          })
+          return announces
+        }
       },
 
       allAnnouncements: async (root, args, context) => {

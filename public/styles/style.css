@@ -164,11 +164,3 @@ h1 {
 .pin {
   color: #4d96ff;
 }
-
-.eraser:hover {
-  color: red;
-}
-
-.unapproved {
-  opacity: 0.6;
-}
