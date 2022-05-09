@@ -1,10 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const { pageAuth, isLoggedIn, checkRole } = require('../../helpers/auth')
+const {
+  pageAuth,
+  isLoggedIn,
+  checkRole,
+  blockRole
+} = require('../../helpers/auth')
 
 const announcements = require('./modules/announcements')
 
-router.use('/announcements', announcements)
+router.use('/announcements', blockRole('member'), announcements)
 
 router.get('/signin', isLoggedIn, (req, res, next) => {
   return res.render('signin', {

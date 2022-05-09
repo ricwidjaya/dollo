@@ -47,6 +47,16 @@ const checkRole = req => {
   }
 }
 
-const blockRole = (req)
+const blockRole = role => {
+  return (req, res, next) => {
+    const currentUserRole = checkRole(req)
+    if (role === currentUserRole) {
+      return res.status(403).render('404', {
+        errorMessage: 'Access Denied'
+      })
+    }
+    next()
+  }
+}
 
-module.exports = { authenticated, pageAuth, isLoggedIn, checkRole }
+module.exports = { authenticated, pageAuth, isLoggedIn, checkRole, blockRole }

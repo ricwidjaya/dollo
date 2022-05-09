@@ -204,7 +204,11 @@
     </g>
   </svg>
 
+   {{#if errorMessage}}
+   <p id="errorText">{{errorMessage}}</p>
+   {{else}}
   <p id="errorText">O-o-oh! Something broke.</p>
+  {{/if}}
   <a id="errorLink" href="/">Back to home page</a>
 </main>
 </main>
