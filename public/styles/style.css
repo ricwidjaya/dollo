@@ -133,10 +133,6 @@ h1 {
   font-size: 16px;
 }
 
-.pin {
-  color: #4d96ff;
-}
-
 .add-task {
   padding: 0;
   position: absolute;
@@ -152,9 +148,27 @@ h1 {
   padding: 0;
 }
 
+.btn-outline-primary:hover {
+  background-color: #fff;
+  color: #84b3f5;
+  border-color: #84b3f5;
+}
+
 .firecamp-list {
   padding: 5px 15px;
   text-align: start;
   background-color: #f9c74f;
   border-radius: 25px;
+}
+
+.pin {
+  color: #4d96ff;
+}
+
+.eraser:hover {
+  color: red;
+}
+
+.unapproved {
+  opacity: 0.6;
 }

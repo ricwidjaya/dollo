@@ -47,4 +47,6 @@ const checkRole = req => {
   }
 }
 
+const blockRole = (req)
+
 module.exports = { authenticated, pageAuth, isLoggedIn, checkRole }
