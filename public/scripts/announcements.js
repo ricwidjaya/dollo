@@ -13,6 +13,7 @@ renderPage()
 async function renderPage() {
   await renderAnnouncements()
   addDeleteListener()
+  addApproveListener()
 }
 
 async function renderAnnouncements() {
@@ -37,7 +38,7 @@ async function renderAnnouncements() {
           ${
             announcement.approved
               ? ''
-              : "<a class='btn'><i class='fa-solid fa-check card-icon'></i></a>"
+              : `<a class='btn approve-btn' data-id="${announcement.id}"><i class='fa-solid fa-check card-icon' data-id="${announcement.id}"></i></a>`
           }
             <a href="/announcements/${
               announcement.id
@@ -85,6 +86,42 @@ async function addDeleteListener() {
       }
 
       card.remove()
+    })
+  })
+}
+
+async function addApproveListener() {
+  const approveBtns = document.querySelectorAll('.approve-btn')
+  if (!approveBtns) return
+
+  approveBtns.forEach(btn => {
+    btn.addEventListener('click', async event => {
+      const id = event.target.dataset.id
+      const res = await fetch('/graphql', {
+        ...gqlConfig,
+        body: JSON.stringify({
+          query: `
+            mutation {
+              approveAnnouncement(id: ${id}) {
+              id
+              title
+              content
+            }
+          }
+          `
+        })
+      })
+
+      const data = await unpackFetchData(res)
+      if (data.errors) {
+        window.alert(data.errors[0].message)
+        return
+      }
+
+      // Change style and remove check icon
+      const card = document.getElementById(id)
+      card.classList.remove('unapproved')
+      event.target.remove()
     })
   })
 }

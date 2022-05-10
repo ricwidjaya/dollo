@@ -33,6 +33,8 @@ const announcementModule = createModule({
           pin: Boolean!
         ): Announcement
 
+        approveAnnouncement(id: ID!): Announcement
+
         editAnnouncement(
           id: ID!
           title: String!
@@ -144,6 +146,17 @@ const announcementModule = createModule({
         })
 
         return announcement
+      },
+
+      approveAnnouncement: async (root, args, context) => {
+        const { id } = args
+        const announcement = await Announcement.findByPk(id)
+
+        const approvedAnnouncement = await announcement.update({
+          approved: true
+        })
+
+        return approvedAnnouncement
       },
 
       editAnnouncement: async (root, args, context) => {
