@@ -23,9 +23,6 @@ async function renderAnnouncements() {
           <h5 class='card-title'>${announcement.title}</h5>
           <small>End On: ${endDate}</small>
           <h6 class='card-subtitle mb-2 text-muted'>${announcement.content}</h6>
-          <div class='text-end mx-3'>            
-            <a class='btn'><i class='fa-solid fa-eraser eraser card-icon'></i></a>
-          </div>
         </div>
       </div>
     `
