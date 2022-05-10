@@ -40,6 +40,8 @@ const announcementModule = createModule({
           expDate: String!
           pin: Boolean!
         ): Announcement
+
+        deleteAnnouncement(id: ID!): Announcement
       }
     `
   ],
@@ -147,9 +149,8 @@ const announcementModule = createModule({
       editAnnouncement: async (root, args, context) => {
         const { id, title, content, expDate, pin } = args
 
-        const announcement = await Announcement.findOne({
-          where: { id }
-        })
+        const announcement = await Announcement.findByPk(id)
+
         const updatedAnnouncement = await announcement.update({
           title,
           content,
@@ -159,6 +160,15 @@ const announcementModule = createModule({
         })
 
         return updatedAnnouncement
+      },
+
+      deleteAnnouncement: async (root, args, context) => {
+        const { id } = args
+        const announcement = await Announcement.findByPk(id)
+
+        const result = await announcement.destroy()
+
+        return result
       }
     }
   }
