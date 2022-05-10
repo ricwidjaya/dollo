@@ -164,3 +164,7 @@ h1 {
 .pin {
   color: #4d96ff;
 }
+
+.unpin {
+  color: #979797;
+}

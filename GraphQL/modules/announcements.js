@@ -44,6 +44,8 @@ const announcementModule = createModule({
         ): Announcement
 
         deleteAnnouncement(id: ID!): Announcement
+
+        togglePin(id: ID!): Announcement
       }
     `
   ],
@@ -180,6 +182,17 @@ const announcementModule = createModule({
         const announcement = await Announcement.findByPk(id)
 
         const result = await announcement.destroy()
+
+        return result
+      },
+
+      togglePin: async (root, args, context) => {
+        const { id } = args
+        const announcement = await Announcement.findByPk(id)
+
+        const result = await announcement.update({
+          pin: !announcement.pin
+        })
 
         return result
       }

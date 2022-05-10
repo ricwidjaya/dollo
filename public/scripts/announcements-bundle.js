@@ -5702,6 +5702,7 @@ async function renderPage() {
   await renderAnnouncements()
   addDeleteListener()
   addApproveListener()
+  addPinListener()
 }
 
 async function renderAnnouncements() {
@@ -5719,7 +5720,14 @@ async function renderAnnouncements() {
       announcement.approved ? '' : 'unapproved'
     }' style='width: 18rem;'>
         <div class='card-body'>
-          <h5 class='card-title'>${announcement.title}</h5>
+          <div class="d-flex">
+            <h5 class='card-title'>${announcement.title}</h5>
+            <a class="btn pin ${announcement.pin ? '' : 'unpin'}"data-id="${
+      announcement.id
+    }"><i class="fa-solid fa-thumbtack card-icon me-2" data-id="${
+      announcement.id
+    }"></i></a>
+          </div>
           <small>End On: ${endDate}</small>
           <h6 class='card-subtitle mb-2 text-muted'>${announcement.content}</h6>
           <div class='text-end mx-3'>
@@ -5810,6 +5818,39 @@ async function addApproveListener() {
       const card = document.getElementById(id)
       card.classList.remove('unapproved')
       event.target.remove()
+    })
+  })
+}
+
+async function addPinListener() {
+  const pinBtns = document.querySelectorAll('.pin')
+
+  pinBtns.forEach(btn => {
+    btn.addEventListener('click', async event => {
+      const id = event.target.dataset.id
+      const res = await fetch('/graphql', {
+        ...gqlConfig,
+        body: JSON.stringify({
+          query: `
+            mutation {
+              togglePin(id: ${id}) {
+              id
+              title
+              content
+            }
+          }
+          `
+        })
+      })
+
+      const data = await unpackFetchData(res)
+      if (data.errors) {
+        window.alert(data.errors[0].message)
+        return
+      }
+
+      // Toggle pin style
+      btn.classList.toggle('unpin')
     })
   })
 }
