@@ -18,13 +18,23 @@ const announcementModule = createModule({
       }
 
       type Query {
-        announcements(role: String): [Announcement]
-        allAnnouncements: [Announcement]
+        announcement(id: ID!): Announcement
+
+        announcements(role: String, archived: Boolean): [Announcement]
       }
 
       type Mutation {
         addAnnouncement(title: String!, content: String!): Announcement
+
         adminAnnounce(
+          title: String!
+          content: String!
+          expDate: String!
+          pin: Boolean!
+        ): Announcement
+
+        editAnnouncement(
+          id: ID!
           title: String!
           content: String!
           expDate: String!
@@ -36,8 +46,31 @@ const announcementModule = createModule({
 
   resolvers: {
     Query: {
+      announcement: async (root, args, context) => {
+        const { id } = args
+        const announcement = await Announcement.findOne({
+          where: { id }
+        })
+
+        return announcement
+      },
+
       announcements: async (root, args, context) => {
-        const { role } = args
+        const { role, archived } = args
+
+        if (archived) {
+          const announces = await Announcement.findAll({
+            where: {
+              teamId: context.user.teamId,
+              expDate: {
+                [Op.lt]: new Date()
+              }
+            },
+            order: [['id', 'DESC']],
+            raw: true
+          })
+          return announces
+        }
 
         if (role === 'member') {
           const announces = await Announcement.findAll({
@@ -45,7 +78,7 @@ const announcementModule = createModule({
               teamId: context.user.teamId,
               approved: true,
               expDate: {
-                [Op.gt]: new Date()
+                [Op.gte]: new Date()
               }
             },
             order: [
@@ -74,11 +107,6 @@ const announcementModule = createModule({
           })
           return announces
         }
-      },
-
-      allAnnouncements: async (root, args, context) => {
-        console.log('all an')
-        return 'b'
       }
     },
 
@@ -114,6 +142,23 @@ const announcementModule = createModule({
         })
 
         return announcement
+      },
+
+      editAnnouncement: async (root, args, context) => {
+        const { id, title, content, expDate, pin } = args
+
+        const announcement = await Announcement.findOne({
+          where: { id }
+        })
+        const updatedAnnouncement = await announcement.update({
+          title,
+          content,
+          expDate,
+          pin,
+          approved: true
+        })
+
+        return updatedAnnouncement
       }
     }
   }

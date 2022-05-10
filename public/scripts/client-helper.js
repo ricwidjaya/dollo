@@ -89,13 +89,14 @@ async function renderProfile() {
 }
 
 // Get announcements
-async function getAnnounces(role) {
+async function getAnnounces(role, archived = false) {
   const res = await fetch('/graphql', {
     ...gqlConfig,
     body: JSON.stringify({
       query: `
         query getAnnounces {
-          announcements(role: "${role}") {
+          announcements(role: "${role}", archived: ${archived}) {
+            id
             title
             content
             expDate

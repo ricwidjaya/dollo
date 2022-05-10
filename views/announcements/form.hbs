@@ -2,12 +2,26 @@
   <h1>Announce a news to the Team</h1>
 </div>
 <form class='row g-3 mx-3 my-auto'>
-  <div class='col-md-6'>
+  {{#if id}}
+    <div class='col-md-3'>
+      <label for='id' class='form-label'>ID</label>
+      <input
+        name='id'
+        type='text'
+        value='{{id}}'
+        class='form-control'
+        id='id'
+        disabled
+      />
+    </div>
+  {{/if}}
+
+  <div class='col-6'>
     <label for='title' class='form-label'>Title</label>
     <input name='title' type='text' class='form-control' id='title' required />
   </div>
 
-  <div class='col-12'>
+  <div class='col-9'>
     <label for='content' class='form-label'>Content</label>
     <input
       name='content'
@@ -25,7 +39,6 @@
       type='date'
       id='expired-date'
       class='form-control'
-      {{! format value='2022-10-01' }}
       required
     />
   </div>

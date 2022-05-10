@@ -11,9 +11,14 @@ router.get('/', (req, res, next) => {
   })
 })
 
-// router.get('/archived', (req, res, next) => {
-
-// })
+router.get('/archived', (req, res, next) => {
+  const role = checkRole(req)
+  return res.render('announcements/archived', {
+    style: 'announcements',
+    script: 'archived',
+    role
+  })
+})
 
 router.get('/new', (req, res, next) => {
   const role = checkRole(req)
@@ -24,9 +29,11 @@ router.get('/new', (req, res, next) => {
 })
 
 router.get('/:id/edit', (req, res, next) => {
+  const { id } = req.params
   const role = checkRole(req)
   return res.render('announcements/form', {
     script: 'announce-form',
+    id,
     role
   })
 })
